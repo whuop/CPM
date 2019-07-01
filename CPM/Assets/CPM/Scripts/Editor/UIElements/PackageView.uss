@@ -1,0 +1,52 @@
+.Label-Small {
+    font-size: 12;
+    -unity-font-style: normal;
+    text-color: rgb(0, 0, 0);
+}
+
+.Label-Small-Bold {
+    font-size: 12;
+    -unity-font-style: bold;
+    text-color: rgb(0,0,0);
+}
+
+.Label-Medium {
+    font-size: 16;
+    -unity-font-style: normal;
+    text-color: rgb(0,0,0)
+}
+
+.Label-Medium-Bold {
+    font-size: 16;
+    -unity-font-style: bold;
+    text-color: rgb(0,0,0)
+}
+
+.Label-Large {
+    font-size : 20;
+    -unity-font-style: normal;
+    text-color: rgb(0,0,0);
+}
+
+.Label-Large-Bold {
+    font-size: 20;
+    -unity-font-style: bold;
+    text-color: rgb(0,0,0);
+}
+
+.Layout-Vertical {
+    flex-direction: column;
+}
+
+.Layout-Horizontal {
+    flex-direction: row;
+}
+
+.Header-Spacing {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.Wrap-Text{
+    white-space: normal;
+}
