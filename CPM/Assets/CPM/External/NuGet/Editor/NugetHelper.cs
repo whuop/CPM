@@ -89,6 +89,8 @@
         /// The current .NET version being used (2.0 [actually 3.5], 4.6, etc).
         /// </summary>
         internal static ApiCompatibilityLevel DotNetVersion;
+        
+        private static string ApplicationCachePath = "";
 
         /// <summary>
         /// Static constructor used by Unity to initialize NuGet and restore packages defined in packages.config.
@@ -118,6 +120,8 @@
 
             // restore packages - this will be called EVERY time the project is loaded or a code-file changes
             Restore();
+
+            ApplicationCachePath = Application.temporaryCachePath;
         }
 
         /// <summary>
@@ -1485,7 +1489,7 @@
 
         private static string GetFilePath(string url)
         {
-            return Path.Combine(Application.temporaryCachePath, GetHash(url));
+            return Path.Combine(ApplicationCachePath, GetHash(url));
         }
 
         private static string GetHash(string s)

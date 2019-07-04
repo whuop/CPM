@@ -243,7 +243,8 @@
 
             // should we include prerelease packages?
             url += string.Format("includePrerelease={0}", includePrerelease.ToString().ToLower());
-
+            
+            //    TODO: This might have to be looked at, removed some code and removed warning for not running on separate thread.
             try
             {
                 return GetPackagesFromUrl(url, UserName, ExpandedPassword);
@@ -342,6 +343,8 @@
 
             List<NugetPackage> packages = new List<NugetPackage>();
 
+            
+            // TODO: Removed certificate authority. This might need to be fixed in the fufure, not really sure what this does.
             // Mono doesn't have a Certificate Authority, so we have to provide all validation manually.  Currently just accept anything.
             // See here: http://stackoverflow.com/questions/4926676/mono-webrequest-fails-with-https
 

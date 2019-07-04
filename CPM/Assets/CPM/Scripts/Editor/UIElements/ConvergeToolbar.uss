@@ -1,0 +1,11 @@
+Label {
+    font-size: 20;
+    font-weight: bold;
+    text-color: rgb(68, 138, 255);
+}
+
+.Toolbar 
+{
+    flex-shrink: 1;
+    flex-grow: 0;
+}

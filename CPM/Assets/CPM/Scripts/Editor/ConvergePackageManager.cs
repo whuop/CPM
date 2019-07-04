@@ -1,4 +1,5 @@
-using Boo.Lang;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using CPM.Editor.UIElements;
 using NugetForUnity;
 using UnityEditor;
@@ -17,8 +18,12 @@ public class ConvergePackageManager : EditorWindow
     }
     
     private List<NugetPackage> m_currentlyBrowsing = new List<NugetPackage>();
+    private string m_pendingSearchString = "";
+    private Task m_searchTask;
 
     private PackageView m_packageView;
+    private TwoPaneSplitView m_splitView;
+    private ConvergeToolbar m_toolbar;
 
     public void OnEnable()
     {
@@ -32,23 +37,79 @@ public class ConvergePackageManager : EditorWindow
         
         // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
-
-        // Import UXML
-        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/CPM/Scripts/Editor/ConvergePackageManager.uxml");
-        VisualElement twoPaneSplitViewTemplate = visualTree.CloneTree();
-        root.Add(twoPaneSplitViewTemplate.ElementAt(0));
-
+        
         // A stylesheet can be added to a VisualElement.
         // The style will be applied to the VisualElement and all of its children.
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/CPM/Scripts/Editor/ConvergePackageManager.uss");
         root.styleSheets.Add(styleSheet);
         
+        BindToolbar();
+        BindTwoPaneSplitView();
         BindBrowseList();
         BindPackageView();
-
+        
         m_packageView = rootVisualElement.Query<PackageView>("package-view").First();
     }
 
+    private void BindTwoPaneSplitView()
+    {
+        // Import UXML
+        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/CPM/Scripts/Editor/ConvergePackageManager.uxml");
+        VisualElement twoPaneSplitViewTemplate = visualTree.CloneTree();
+        rootVisualElement.Add(twoPaneSplitViewTemplate.ElementAt(0));
+    }
+
+    private void BindToolbar()
+    {
+        // Import UXML
+        var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/CPM/Scripts/Editor/UIElements/ConvergeToolbar.uxml");
+        VisualElement toolbar = visualTree.CloneTree();
+        rootVisualElement.Add(toolbar.ElementAt(0));
+
+        m_toolbar = rootVisualElement.Query<ConvergeToolbar>("converge-toolbar");
+        m_toolbar.Initialize();
+        m_toolbar.RegisterCallback<KeyUpEvent>(ToolbarKeyUpEvent);
+        m_toolbar.BindSearchField((evt =>
+        {
+            m_pendingSearchString = evt.newValue;
+            // TODO: Convert this so that it doesn choke the main thread. Need to rewrite in NuGetHelper.cs WWW in line 1441
+            
+            // new Task(Search).Start();
+        }));
+        
+    }
+
+    private void ToolbarKeyUpEvent(KeyUpEvent evt)
+    {
+        if (evt.keyCode == KeyCode.Return)
+        {
+            Search();
+        }
+    }
+    
+    private async void Search()
+    {
+        Debug.Log("Initiated search");
+        var list = NugetHelper.Search(m_pendingSearchString);
+        Debug.Log("Finished search");
+        foreach (var package in list)
+        {
+            Debug.Log("found package:" + package.Title);
+        }
+        
+        m_currentlyBrowsing.Clear();
+        m_currentlyBrowsing.AddRange(list);
+        var listView = rootVisualElement.Query<ListView>("browse-packages-list").First();
+        SelectFirstPackageOrShowMessages(listView);
+    }
+
+    private void SelectFirstPackageOrShowMessages(ListView listView)
+    {
+        if (listView.itemsSource.Count > 0)
+            listView.selectedIndex = 0;
+        listView.Refresh();
+    }
+    
     private void BindBrowseList()
     {
         var listView = rootVisualElement.Query<ListView>("browse-packages-list").First();
@@ -89,6 +150,7 @@ public class ConvergePackageManager : EditorWindow
             Debug.Log(("Selection Changed: " + list.GetType()));
             m_packageView.SetPreviewedPackage(list[0] as NugetPackage);
         };
+        //SelectFirstPackageOrShowMessages(listView);
     }
 
     private void BindPackageView()
@@ -98,6 +160,7 @@ public class ConvergePackageManager : EditorWindow
         // Import UXML
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/CPM/Scripts/Editor/UIElements/PackageView.uxml");
         VisualElement packageViewTemplate = visualTree.CloneTree();
+        packageViewTemplate.Query<PackageView>().First().Initialize();
         flexedPane.Add(packageViewTemplate);
     }
 }

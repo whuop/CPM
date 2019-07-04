@@ -1,0 +1,8 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:cpm="CPM.Editor.UIElements">
+    <Label name="package-src-label" text="Local Package Source" />
+    <TextField name="package-src-field" binding-path="NuGetConfig.RepositoryPath" />
+    <VisualElement name="package-sources--container">
+        <Label name="package-sources--label" Text="External Package Sources:" />
+        <ListView name="package-sources--list" />
+    </VisualElement>
+</UXML>

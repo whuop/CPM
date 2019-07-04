@@ -3,7 +3,6 @@
         <VisualElement name="fixed-pane">
             <Label name="browse-packages-label" text="Browse" />
             <ListView name="browse-packages-list" class="browse-packages-list" />
-            <Label name="search-packages-field" text="Search Field" />
         </VisualElement>
         <VisualElement name="flexed-pane" />
     </cpm:TwoPaneSplitView>

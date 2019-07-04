@@ -1,0 +1,9 @@
+<UXML xmlns="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:cpm="CPM.Editor.UIElements">
+    <cpm:ConvergeToolbar name="converge-toolbar" class="Toolbar">
+        <uie:Toolbar name="converge-toolbar--toolbar">
+            <uie:ToolbarPopupSearchField name="converge-toolbar--search-field" text="Search by package name..." />
+            <uie:ToolbarMenu name="converge-toolbar--target-framework" text="Target Framework" />
+            <uie:ToolbarButton name="converge--toolbar-nuget-config" text="NuGet Config" />
+        </uie:Toolbar>        
+    </cpm:ConvergeToolbar>
+</UXML>

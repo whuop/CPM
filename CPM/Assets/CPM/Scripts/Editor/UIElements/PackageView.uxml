@@ -1,13 +1,36 @@
 <UXML xmlns="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:cpm="CPM.Editor.UIElements">
     <cpm:PackageView name="package-view">
-        <Label name="package-view--title" class="Label-Large-Bold Header-Spacing" text="Placeholder Label"/>
-        <VisualElement name="package-view--author-container" class="Layout-Horizontal">
-            <Label name="package-view--author-label" text="Author(s): " class="Label-Medium-Bold" />
-            <Label name="package-view--author-text" text="PlaceHolder authors" class="Label-Medium" />
+        <VisualElement name="package-view--header" class="Layout-Horizontal Header-Wrapper">
+            <Label name="package-view--title" class="Label-Large-Bold Header-Spacing" text="Placeholder Label"/>
+            <VisualElement name="package-view--image" class="Image-Preview" />
         </VisualElement>
         <VisualElement name="package-view--description-container" class="Layout-Vertical">
             <Label name="package-view--description-label" text="Description:" class="Label-Medium-Bold" />
             <Label name="package-view--description-text" text="Placeholder description for this item." class="Label-Medium Wrap-Text" />
         </VisualElement>
+        <VisualElement name="spacer_0" class="Spacer-Small" />
+        <VisualElement name="package-view--author-container" class="Layout-Horizontal">
+            <Label name="package-view--author-label" text="Author(s): " class="Label-Medium-Bold" />
+            <Label name="package-view--author-text" text="PlaceHolder authors" class="Label-Medium" />
+        </VisualElement>
+        <VisualElement name="package-view--license-container" class="Layout-Horizontal">
+            <Label name="package-view--license-label" text="License: " class="Label-Medium-Bold" />
+            <Label name="package-view--license-text" text="placeholder" class="Label-Medium"/>
+        </VisualElement>
+        <VisualElement name="package-view--source-container" class="Layout-Horizontal">
+            <Label name="package-view--source-label" text="Source: " class="Label-Medium-Bold" />
+            <Label name="package-view--source-text" text="placeholder" class="Label-Medium"/>
+        </VisualElement>
+        <VisualElement name="package-view--pkg-version-container" class="Layout-Horizontal">
+            <Label name="package-view--pkg-version-label" text="Package Version: " class="Label-Medium-Bold" />
+            <Label name="package-view--pkg-version-text" text="placeholder" class="Label-Medium"/>
+        </VisualElement>
+        <VisualElement name="package-view--downloads-container" class="Layout-Horizontal">
+            <Label name="package-view--downloads-label" text="Downloads: " class="Label-Medium-Bold" />
+            <Label name="package-view--downloads-text" text="155 000" class="Label-Medium"/>
+        </VisualElement>
+        
+        <VisualElement name="spacer_1" class="Spacer-Small" />
+        <Button name="package-view--primary-action" class="Action-Button" text="Install Package" />
     </cpm:PackageView>
 </UXML>

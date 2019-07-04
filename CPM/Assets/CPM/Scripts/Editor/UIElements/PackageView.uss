@@ -42,6 +42,10 @@
     flex-direction: row;
 }
 
+.Header-Wrapper {
+    padding-top: 15px;
+}
+
 .Header-Spacing {
     padding-bottom: 15px;
     padding-top: 15px;
@@ -49,4 +53,37 @@
 
 .Wrap-Text{
     white-space: normal;
+}
+
+.Center-Text{
+    text-align-all: center;
+}
+
+.Image-Preview{
+    margin-left: 15px;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.Spacer-Small {
+    padding-top: 15px;
+}
+
+.Action-Button 
+{
+    /* default for <button>, but useful for <a> */
+    -unity-text-align: middle-center;
+
+    /* create a small space when buttons wrap on 2 lines */
+    margin: 2px 0;
+
+    /* invisible border (will be colored on hover/focus) */
+    border-width: 1px;
+
+    /* size comes from text & padding (no width/height) */
+    padding: 15px;
+
+    /* make sure colors have enough contrast! */
+    /*color: #ffffff;*/
+    background-color: #9555af;
 }

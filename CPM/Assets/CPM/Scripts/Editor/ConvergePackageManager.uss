@@ -33,16 +33,16 @@
 }
 
 .unity-two-pane-split-view__dragline--horizontal {
-    width: 10px;
-    left: -5px;
+    width: 2px;
+    left: 0px;
     top: 0px;
     bottom: 0px;
     cursor: resize-horizontal;
 }
 
 .unity-two-pane-split-view__dragline--vertical {
-    height: 10px;
-    top: -5px;
+    height: 2px;
+    top: 0px;
     left: 0px;
     right: 0px;
     cursor: resize-vertical;
